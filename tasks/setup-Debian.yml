@@ -4,9 +4,12 @@
     pkg: curl
     state: installed
 
+- name: Copy Jenkins apt repository key.
+  copy: src=jenkins.io.key dest=/tmp/jenkins.io.key mode=0744
+
 - name: Add Jenkins apt repository key.
   apt_key:
-    url: "{{ jenkins_repo_key_url }}"
+    file: /tmp/jenkins.io.key
     state: present
 
 - name: Add Jenkins apt repository.
